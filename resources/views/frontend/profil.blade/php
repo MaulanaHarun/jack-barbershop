@@ -1,0 +1,17 @@
+@extends('frontend.layout')
+
+@section('content')
+<h2>Profil Jeck Barbershop</h2>
+
+<p>
+Jeck Barbershop adalah tempat cukur modern dengan pelayanan terbaik dan profesional.
+Kami menyediakan berbagai layanan grooming untuk membuat Anda tampil keren dan percaya diri.
+</p>
+
+<h4>Alamat</h4>
+<p>Jl. Contoh No. 123, Kota Anda</p>
+
+<h4>Jam Operasional</h4>
+<p>Senin – Minggu, 10.00 – 21.00</p>
+
+@endsection
