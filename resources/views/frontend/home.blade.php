@@ -25,7 +25,16 @@ body{
   overflow-x:hidden;
   animation:pageSlide .8s ease;
 }
+.reveal{
+  opacity:0;
+  transform:translateY(60px);
+  transition:all .9s ease;
+}
 
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
 /* ===== PAGE SLIDE ===== */
 @keyframes pageSlide{
   from{
@@ -36,6 +45,9 @@ body{
     opacity:1;
     transform:translateX(0);
   }
+  html{
+  scroll-behavior: smooth;
+}
 }
 
 /* ================= HEADER STYLE REVISED ================= */
@@ -79,10 +91,23 @@ header {
   border-radius: 50%;
 }
 
+<<<<<<< Updated upstream
 /* --- NAV MENU (DESKTOP) --- */
 .nav-menu {
   display: flex;
   gap: 40px; /* Jarak antar menu */
+=======
+/* NAV */
+.nav-menu{
+  display:flex;
+  gap:100px;
+  position:relative;
+
+   position:absolute;
+  top:60px;
+  left:78%;
+  transform:translateX(-50%);
+>>>>>>> Stashed changes
 }
 
 .nav-menu a {
@@ -235,52 +260,144 @@ header {
   color:#000;
 }
 
-/* ================= WOOD BACKGROUND REAL ================= */
+.hero-logo{
+  width:200px;
+  height:200px;
+  background:#fff;
+  border-radius:50%;
+  padding:18px;
+  box-shadow:0 0 30px rgba(255,198,40,.8);
+
+  position:absolute;
+  top:40px;
+  left:70px;
+  margin:0;
+}
+
+.hero-logo img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+/*=========HERO-2==========*/
+.hero-2 {
+  position: relative;
+  height: 100vh;
+  background: url("/babout.png") center / cover no-repeat;
+  overflow: hidden;
+}
+
+/* overlay gelap */
+.hero-2::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+/* ===================== */
+/* LABEL ATAS */
+/* ===================== */
+.hero2-label {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 18px 42px;
+  background: #c7c86d;
+  clip-path: polygon(0 0,150% 0,100% 0%, 80% 100%, 0 100%);
+  z-index: 3;
+}
+
+.hero2-label h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+.hero2-label span {
+  font-size: 18px;
+  color: #111;
+}
+
+/* ===================== */
+/* KONTEN KIRI */
+/* ===================== */
+.hero2-left {
+  position: absolute;
+  top: 50%;
+  left: 200px;
+  transform: translateY(-50%);
+  max-width: 650px;
+  color: #d8d8d8;
+  z-index: 3;
+}
+
+.hero2-left h1 {
+  font-size: 45px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+}
+
+.hero2-left p {
+  font-size: 20px;
+  line-height: 1.75;
+  color: #cfcfcf;
+  margin-bottom: 30px;
+}
+
+/* BUTTON */
+.hero2-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: 0.3s ease;
+}
+
+.hero2-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* ===================== */
+/* KONTEN KANAN */
+/* ===================== */
+.hero2-right {
+  position: absolute;
+  top: 30%;
+  right: 400px;
+  transform: translateY(-50%);
+  max-width: 300px;
+  color: #ffffff;
+  z-index: 3;
+}
+
+.hero2-right h4 {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.hero2-right p {
+  font-size: 20px;
+  line-height: 1.65;
+  opacity: 0.95;
+}
+
+/* =================  ABOUT  ================= */
 .about{
   min-height:100vh;
   padding:120px 8%;
-  background:
-    repeating-linear-gradient(
-      115deg,
-      rgba(125,85,55,0.18) 0px,
-      rgba(125,85,55,0.18) 1px,
-      transparent 1px,
-      transparent 5px
-    ),
-    repeating-linear-gradient(
-      120deg,
-      rgba(90,60,35,0.12) 0px,
-      rgba(90,60,35,0.12) 3px,
-      transparent 3px,
-      transparent 12px
-    ),
-    radial-gradient(
-      1200px 800px at 40% 30%,
-      rgba(140,95,60,0.35),
-      transparent 65%
-    ),
-    linear-gradient(
-      135deg,
-      #050403,
-      #0f0e0c,
-      #1b1815,
-      #090806
-    );
+  background:url('/kayu.png') center/cover no-repeat;
 }
 
-/* ================= SCROLL ANIMATION ================= */
-.reveal{
-  opacity:0;
-  transform:translateY(80px) scale(.98);
-  transition:1s ease;
-}
-
-.reveal.active{
-  opacity:1;
-  transform:translateY(0) scale(1);
-}
-
-/* ================= ABOUT ================= */
+/* ================= HEADER ================= */
 .about-header{
   max-width:900px;
   margin-bottom:70px;
@@ -324,7 +441,7 @@ header {
 }
 
 .value-card h3{
-  font-size:16px;
+  font-size:30px;
 }
 
 /* ================= VISION BOARD ================= */
@@ -369,6 +486,7 @@ header {
   color:#000;
 }
 
+<<<<<<< Updated upstream
 .reveal{
   opacity:0;
   transform:translateY(80px) scale(.98);
@@ -585,6 +703,137 @@ header {
     margin-top: 30px;
   }
 }
+=======
+/* ================= SERVICE ================= */
+.service-section {
+  position: relative;
+  min-height: 100vh;
+  background: url('/kayu4.png') center / cover no-repeat;
+  padding: 120px 80px;
+  overflow: hidden;
+}
+
+
+/* overlay */
+.service-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: none;
+  z-index: 1;
+}
+
+/* ===================== */
+/* LABEL */
+/* ===================== */
+.service-label {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: #c7c86d;
+  padding: 18px 120px;
+  clip-path: polygon(0% 0, 100% 0, 100% 100%, 20% 100%, 0 0%);
+  z-index: 3;
+  text-align: right;
+}
+
+.service-label h3 {
+  font-size: 20px;
+  color: #111;
+}
+
+.service-label span {
+  font-size: 18px;
+  color: #111;
+}
+
+/* ===================== */
+/* ICON TENGAH */
+/* ===================== */
+.service-icon {
+  position: absolute;
+  inset: 0;
+  background: url("/scissors.png") center / 420px no-repeat;
+  opacity: 0.18;
+  z-index: 2;
+}
+
+/* ===================== */
+/* LIST */
+/* ===================== */
+.service-list {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  z-index: 3;
+}
+
+.service-list.left {
+  left: 100px;
+}
+
+.service-list.right {
+  right: 100px;
+  text-align: right;
+}
+
+/* ITEM */
+.service-item {
+  margin-bottom: 48px;
+}
+
+.service-item h4 {
+  font-size: 35px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6px;
+  position: relative;
+}
+
+/* garis tipis */
+.service-item h4::after {
+  content: "";
+  display: block;
+  width: 320px;
+  height: 1px;
+  background: rgba(255,255,255,0.5);
+  margin-top: 6px;
+}
+
+.service-list.right h4::after {
+  margin-left: auto;
+}
+
+.service-item p {
+  font-size: 25px;
+  line-height: 1.5;
+  color: #d5d5d5;
+}
+
+/* ===================== */
+/* BUTTON */
+/* ===================== */
+.service-btn {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 16px 44px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 25px;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.25);
+  z-index: 3;
+  transition: 0.3s ease;
+}
+
+.service-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+>>>>>>> Stashed changes
 /* =================  CONTACT  ================= */
 .contact{
   padding:80px 8%;
@@ -691,32 +940,6 @@ header {
   font-size:13px;
   color:#aaa;
 }
-/* ================= SLIDE ANIMATION CONTACT ================= */
-.slide-contact{
-  opacity:0;
-  transform:translateY(70px);
-  transition:all 0.9s ease;
-}
-
-.slide-contact.active{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* Delay supaya muncul bertahap seperti poster */
-.slide-contact:nth-child(1){
-  transition-delay:0.1s;
-}
-.slide-contact:nth-child(2){
-  transition-delay:0.3s;
-}
-.slide-contact:nth-child(3){
-  transition-delay:0.5s;
-}
-.slide-contact:nth-child(4){
-  transition-delay:0.7s;
-}
-
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -730,13 +953,17 @@ header {
 .reservasi{
    min-height:100vh;
   position:relative;
+  z-index: 5;
+  background:url('/kayu.png') center/cover no-repeat;
   display:flex;
-  align-items:center;
+  flex-direction:column; 
   justify-content:center;
 }
 .form-card{
   background:rgba(175,165,160,0.9);
   backdrop-filter:blur(6px);
+  position: relative;
+  z-index: 10;
 }
 
 .reservasi-content{
@@ -783,6 +1010,26 @@ header {
   font-weight:600;
   cursor:pointer;
 }
+/* ================= RESERVASI INFO TEXT ================= */
+.reservasi-info{
+  margin-top:120px;
+  transform:translateY(40px);
+  color:#eee;
+}
+
+.reservasi-info h3{
+  font-size:20px;
+  margin-bottom:12px;
+  font-weight:600;
+}
+
+.reservasi-info p{
+  font-size:14px;
+  line-height:1.8;
+  color:#ddd;
+  max-width:520px;
+  margin:auto;
+}
 
 /* ================= FOOTER ================= */
 footer{
@@ -796,6 +1043,7 @@ footer{
 <body>
 
 <header>
+<<<<<<< Updated upstream
   <div class="header-logo">
     <img src="{{ asset('logo2.png') }}" alt="Logo">
   </div>
@@ -806,6 +1054,8 @@ footer{
     <span class="bar"></span>
   </div>
 
+=======
+>>>>>>> Stashed changes
   <nav class="nav-menu">
     <a href="{{ url('/home') }}">Home</a>
     
@@ -819,6 +1069,9 @@ footer{
 </header>
 
 <section id="home" class="hero">
+  <div class="hero-logo">
+    <img src="logo2.png" alt="Jack Barbershop">
+  </div>
   <div class="hero-content reveal">
     <h1 class="hero-title">
       Your Hair, Your<br>
@@ -832,8 +1085,91 @@ footer{
   </div>
 </section>
 
-<div class="about-header reveal">
+<section class="hero-2">
+  <!-- LABEL ATAS -->
+  <div class="hero2-label">
+    <h3>Life Starts Fresh With a Sharp Cut —</h3>
+    <span>Jack Barbershop</span>
+  </div>
 
+  <!-- KONTEN KIRI -->
+  <div class="hero2-left">
+    <h1>PELAYANAN YANG TULUS DAN BERKELAS</h1>
+    <p>
+      Tempat ini dibuat untuk pria yang ingin tampil rapi tanpa ribet.<br>
+      Kami percaya potongan rambut yang bagus bisa bikin hari kamu lebih pede,<br>
+      lebih segar, dan lebih “kamu”.<br>
+      Dengan gaya yang pas dan sentuhan barber berpengalaman, kami bantu<br>
+      kamu tampil keren dengan cara yang sederhana dan nyaman.
+    </p>
+
+    <a href="#about" class="hero2-btn">BACA TENTANG KAMI</a>
+  </div>
+
+  <!-- KONTEN KANAN -->
+  <div class="hero2-right">
+    <h4>Location</h4>
+    <p>
+      R742+48C, Jl. K.H. Hasyim Ashari, Rw. 1,<br>
+      Dalpenang, Kec. Sampang, Kabupaten<br>
+      Sampang, Jawa Timur 69216
+    </p>
+  </div>
+</section>
+
+<section id="service" class="service-section reveal">
+  <!-- LABEL KANAN ATAS -->
+  <div class="service-label">
+    <h3>Service & Price</h3>
+    <span>All Store Wide</span>
+  </div>
+
+  <!-- ICON TENGAH -->
+  <div class="service-icon"></div>
+
+  <!-- LIST KIRI -->
+  <div class="service-list left">
+    <div class="service-item">
+      <h4>Styling</h4>
+      <p>Blow dry, wax, atau pomade untuk tampilan rapi.</p>
+    </div>
+
+    <div class="service-item">
+      <h4>Beard / Shave</h4>
+      <p>Cukur, rapikan jenggot dan kumis.</p>
+    </div>
+
+    <div class="service-item">
+      <h4>Hair Wash & Treatment</h4>
+      <p>Cuci rambut dan perawatan kulit kepala.</p>
+    </div>
+  </div>
+
+  <!-- LIST KANAN -->
+  <div class="service-list right">
+    <div class="service-item">
+      <h4>Haircut</h4>
+      <p>Potong rambut sesuai gaya dan tren.</p>
+    </div>
+
+    <div class="service-item">
+      <h4>Hot Towel / Relaxation</h4>
+      <p>Handuk hangat dan pijat ringan untuk pengalaman premium.</p>
+    </div>
+
+    <div class="service-item">
+      <h4>Haircut</h4>
+      <p>Potong rambut sesuai gaya dan tren.</p>
+    </div>
+  </div>
+
+  <!-- BUTTON -->
+  <a href="#reservasi" class="service-btn">RESERVASI SEKARANG</a>
+
+</section>
+
+<section id="about" class="about">
+<section class="about reveal">
     <h1>KAMI MEMBAWA GAYA TERBAIK UNTUKMU</h1>
     <p>
       Di Jack Barbershop, setiap potongan rambut dibuat dengan perhatian penuh akan detail
@@ -845,17 +1181,17 @@ footer{
   <!-- VALUE CARDS -->
   <div class="values">
     <div class="value-card reveal">
-      <img src="/img/precision.png" alt="Precision">
+      <img src="/precision.jpeg" alt="Precision">
       <h3>Precision</h3>
     </div>
 
     <div class="value-card reveal">
-      <img src="/img/hygiene.png" alt="Hygiene First">
+      <img src="/hygiene.jpeg" alt="Hygiene First">
       <h3>Hygiene First</h3>
     </div>
 
     <div class="value-card reveal">
-      <img src="/img/comfort.png" alt="Comfort">
+      <img src="/comfort.jpeg" alt="Comfort">
       <h3>Comfort</h3>
     </div>
   </div>
@@ -873,7 +1209,9 @@ footer{
   <div class="about-actions reveal">
     <a href="#services">LIHAT LAYANAN</a>
     <a href="#reservasi">BOOKING SEKARANG</a>
+    <a href="#reservasi" class="about-btn">MAKE AN APPOINTMENT</a>
   </div>
+<<<<<<< Updated upstream
 
 </section>
 <section class="service" id="service">
@@ -938,10 +1276,12 @@ footer{
 
   <a href="#reservasi" class="service-btn">RESERVASI SEKARANG</a>
 
+=======
+>>>>>>> Stashed changes
 </section>
 
 <section id="reservasi" class="reservasi">
-  <div class="reservasi-content reveal">
+  <div class="reservasi-content ">
     <h1>Booking Sekarang & Nikmati Perawatan Premium</h1>
 
     <div class="form-card">
@@ -970,12 +1310,18 @@ footer{
 
       <button class="btn-submit">Booking Sekarang</button>
     </div>
+       <div class="reservasi-info">
+    <h3>Mengapa Pilih Jack Barbershop?</h3>
+    <p>
+      Potongan rapi, pengalaman nyaman, dan layanan premium.
+      Tim barber profesional siap membantu kamu tampil percaya diri.
+    </p>
   </div>
 </section>
-<section class="contact">
+
+<section id="contact" class="contact reveal">
 
   <div class="contact-container">
-
     <!-- COLUMN 1 -->
     <div>
       <div class="contact-logo">
@@ -1004,18 +1350,9 @@ footer{
     <div>
       <h3 class="contact-title">Hubungi kami</h3>
       <ul class="contact-list">
-        <li>
-          <span class="icon wa">☎</span>
-          0821234567890
-        </li>
-        <li>
-          <span class="icon wa">☎</span>
-          0821234567890
-        </li>
-        <li>
-          <span class="icon mail">@</span>
-          info@jackbarbershop.com
-        </li>
+        <li><span class="icon wa">☎</span>0821234567890</li>
+        <li><span class="icon wa">☎</span>0821234567890</li>
+        <li><span class="icon mail">@</span>info@jackbarbershop.com</li>
       </ul>
     </div>
 
@@ -1027,13 +1364,14 @@ footer{
         Sampang, Jawa Timur
       </p>
     </div>
-
   </div>
 
   <div class="contact-footer">
     © 2025 Jack Barbershop. All rights reserved.
   </div>
-  <section>
+
+</section>
+
 <footer>
   © 2025 Jack Barbershop. All rights reserved.
 </footer>
