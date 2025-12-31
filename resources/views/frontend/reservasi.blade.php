@@ -229,9 +229,15 @@ body {
                     {{ $j->status == 'penuh' ? 'disabled' : '' }}
                 >
                 <span>
-                    {{ $j->hari }} <br>
-                    {{ substr($j->waktu,0,5) }}
+                    {{ \Carbon\Carbon::parse($j->tanggal)->isoFormat('dddd, D MMM') }} <br>
+                    <strong style="font-size:1.4em; display:block; margin-top:5px;">
+                        {{ substr($j->waktu, 0, 5) }}
+                    </strong>
                 </span>
+                
+                @if($j->status == 'penuh')
+                    <div style="background:red; color:white; font-size:10px; padding:2px 5px; border-radius:4px; margin-top:5px;">FULL</div>
+                @endif
             </label>
         @endforeach
     </div>

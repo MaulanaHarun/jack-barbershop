@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AdminSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class AdminSeeder extends Seeder
 
         DB::table('admin')->insert([
             'username'   => 'admin',
-            'password'   => md5('123456'), // password = 123456
+            'password'   => Hash::make('123456'), // password = 123456
             'created_at' => now(),
             'updated_at' => now(),
         ]);

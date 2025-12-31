@@ -38,84 +38,143 @@ body{
   }
 }
 
-/* ================= HEADER ================= */
-header{
-  position:fixed;
-  top:0;
-  left:0;
-  width:65%;
-  height:110px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:80px;
-  z-index:999;
+/* ================= HEADER STYLE REVISED ================= */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #FFC628;
+  transition: 0.3s;
 }
 
-/* LOGO */
-.header-logo{
-  width:150px;
-  height:150px;
-  background:#fff;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px;
-  box-shadow:0 0 15px rgba(255,198,40,.6);
+/* --- LOGO FIX (Agar tidak gepeng) --- */
+.header-logo {
+  width: 80px;  /* Ukuran disesuaikan agar proporsional di header 100px */
+  height: 80px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  box-shadow: 0 0 15px rgba(255,198,40,0.6);
+  
+  /* PENTING: Mencegah logo tergencet flexbox */
+  flex-shrink: 0; 
 }
 
-.header-logo img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
+.header-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
 }
 
-/* NAV */
-.nav-menu{
-  display:flex;
-  gap:100px;
-  position:relative;
+/* --- NAV MENU (DESKTOP) --- */
+.nav-menu {
+  display: flex;
+  gap: 40px; /* Jarak antar menu */
 }
 
-.nav-menu::after{
-  content:"";
-  position:absolute;
-  bottom:-12px;
-  left:0;
-  width:100%;
-  height:2px;
-  background:rgba(255,255,255,.6);
-}
-
-.nav-menu a{
-  font-size:25px;
-  color:#fff;
-  text-decoration:none;
-  padding-bottom:10px;
-  position:relative;
+.nav-menu a {
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: 0.3s;
 }
 
 .nav-menu a:hover,
-.nav-menu a.active{
-  color:#FFC628;
+.nav-menu a.active {
+  color: #FFC628;
 }
 
-.nav-menu a::after{
-  content:"";
-  position:absolute;
-  bottom:-13px;
-  left:0;
-  width:0%;
-  height:3px;
-  background:#FFC628;
-  transition:.3s;
+/* Garis bawah animasi saat hover */
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #FFC628;
+  transition: 0.3s;
 }
 
-.nav-menu a:hover::after{
-  width:100%;
+.nav-menu a:hover::after {
+  width: 100%;
 }
 
+/* --- HAMBURGER MENU (MOBILE TOGGLE) --- */
+.hamburger {
+  display: none; /* Sembunyi di Laptop */
+  cursor: pointer;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  background-color: #FFC628; /* Warna Emas */
+}
+
+/* ================= RESPONSIVE MOBILE (Layar Kecil) ================= */
+@media (max-width: 900px) {
+  
+  /* Munculkan Tombol Hamburger */
+  .hamburger {
+    display: block;
+  }
+
+  /* Animasi Hamburger jadi 'X' saat aktif */
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Menu Navigasi Jadi Sidebar/Dropdown */
+  .nav-menu {
+    position: fixed;
+    left: -100%; /* Sembunyi di kiri layar */
+    top: 100px; /* Muncul tepat di bawah header */
+    gap: 0;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.95); /* Hitam pekat */
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    border-bottom: 1px solid #FFC628;
+    padding-bottom: 20px;
+  }
+
+  /* Class tambahan via JS untuk memunculkan menu */
+  .nav-menu.active {
+    left: 0; 
+  }
+
+  .nav-menu a {
+    margin: 16px 0;
+    font-size: 20px;
+    display: block; /* Agar area klik luas */
+  }
+}
 /* ================= HERO ================= */
 .hero{
   min-height:100vh;
@@ -327,159 +386,203 @@ header{
     grid-template-columns:1fr;
   }
 }
-/* ================= SERVICE SECTION ================= */
-.service{
-  min-height:100vh;
+/* ================= SERVICE SECTION REVISED ================= */
+.service {
+  min-height: 100vh;
   background:
-    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.75)),
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
     repeating-linear-gradient(
-      -20deg,
-      #2b1408,
-      #2b1408 10px,
-      #3a1b0c 20px,
-      #1a0d07 30px
+      -45deg,
+      #1a0d07,
+      #1a0d07 10px,
+      #2b1408 20px
     );
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:120px 8%;
-  overflow:hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 5%; /* Padding kiri kanan 5% agar tidak mepet */
+  overflow: hidden;
 }
 
-/* BADGE */
-.service-badge{
-  position:absolute;
-  top:40px;
-  right:0;
-  background:#c6c66f;
-  color:#111;
-  padding:18px 40px;
-  font-weight:700;
-  text-align:right;
-  clip-path:polygon(0 0,100% 0,85% 100%,0 100%);
+/* CONTAINER GRID YANG RAPI */
+.service-container {
+  width: 100%;
+  max-width: 1200px; /* Batasi lebar maksimal agar tidak terlalu melebar di layar besar */
+  margin: 0 auto;
+  display: grid;
+  /* Kiri 1 bagian, Tengah otomatis (sesuai gambar), Kanan 1 bagian */
+  grid-template-columns: 1fr auto 1fr; 
+  align-items: center;
+  gap: 40px; /* Gap diperkecil dari 120px jadi 40px agar muat di laptop kecil */
 }
 
-/* CONTENT */
-.service-container{
-  max-width:100%;
-  width:100%;
-  display:grid;
-  grid-template-columns:1fr 1.2fr 1fr;
-  gap:120px;
-  align-items:center;
-  padding:0 6%;
-}
-.left{
-  justify-self:start;
+/* CENTER IMAGE (LINGKARAN) */
+.service-center {
+  position: relative;
+  width: 350px; /* Ukuran lingkaran fixed tapi proporsional */
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 }
 
-.right{
-  justify-self:end;
+.service-center::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5); /* Lingkaran transparan gelap */
+  border: 1px solid #FFC628; /* Tambah border emas tipis biar elegan */
+  box-shadow: 0 0 30px rgba(255, 198, 40, 0.1);
+  z-index: 1;
 }
 
-
-/* CENTER LOGO */
-.service-center{
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.service-center img {
+  width: 280px; /* Gambar gunting di dalam lingkaran */
+  opacity: 0.8;
+  position: relative;
+  z-index: 2;
+  transition: 0.3s;
 }
 
-.service-center::before{
-  content:"";
-  width:380px;
-  height:380px;
-  border-radius:50%;
-  background:rgba(0,0,0,.35);
-  position:absolute;
+.service-center:hover img {
+  transform: scale(1.1) rotate(5deg); /* Efek animasi saat hover */
+  opacity: 1;
 }
 
-.service-center img{
-  width:320px;
-  opacity:.35;
-  position:relative;
-  z-index:2;
+/* SERVICE ITEM (TEXT) */
+.service-item {
+  margin-bottom: 30px;
 }
 
-/* SERVICE ITEM */
-.service-item{
-  margin-bottom:40px;
+.service-item h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 5px;
+  text-transform: uppercase;
 }
 
-.service-item h3{
-  font-size:20px;
-  font-weight:600;
-  margin-bottom:8px;
+/* GARIS PEMBATAS (YANG BIKIN ERROR SEBELUMNYA) */
+.service-item .line {
+  height: 2px;
+  background: #FFC628;
+  margin: 8px 0;
+  
+  /* PERBAIKAN UTAMA: */
+  width: 100px; /* Jangan 400px, cukup 100px atau gunakan persentase */
+  max-width: 100%; /* Agar tidak menabrak layar kecil */
 }
 
-.service-item p{
-  font-size:14px;
-  color:#ddd;
-  line-height:1.7;
+.service-item p {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.5;
+  margin-bottom: 5px;
 }
 
-.service-item .line{
-  width:400px;
-  height:2px;
-  background:rgba(255,255,255,.6);
-  margin-top:12px;
+.service-item small {
+  display: block;
+  font-size: 15px;
+  margin-top: 5px;
 }
 
-/* ALIGN */
-.left{
-  text-align:left;
+/* ALIGNMENT (KIRI & KANAN) */
+.left {
+  text-align: right; /* Teks kiri rata kanan (menghadap gambar) */
 }
-.right{
-  text-align:right;
-}
-.right .line{
-  margin-left:auto;
+.left .service-item .line {
+  margin-left: auto; /* Garis geser ke kanan */
 }
 
-/* BUTTON */
-.service-btn{
-  position:absolute;
-  bottom:-80px;
-  left:50%;
-  transform:translateX(-50%);
-  padding:14px 40px;
-  border:2px solid #aaa;
-  color:#fff;
-  text-decoration:none;
-  letter-spacing:2px;
-  transition:.3s;
+.right {
+  text-align: left; /* Teks kanan rata kiri (menghadap gambar) */
+}
+.right .service-item .line {
+  margin-right: auto; /* Garis geser ke kiri */
 }
 
-.service-btn:hover{
-  background:#fff;
-  color:#000;
+/* TOMBOL RESERVASI */
+.service-btn {
+  position: absolute;
+  bottom: 30px; /* Tempel di bawah section */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 35px;
+  border: 1px solid #FFC628;
+  color: #FFC628;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 2px;
+  transition: 0.3s;
+  background: rgba(0,0,0,0.8);
+  border-radius: 50px;
 }
 
-/* ================= RESPONSIVE ================= */
-@media(max-width:900px){
-  .service-container{
-    grid-template-columns:1fr;
-    gap:40px;
+.service-btn:hover {
+  background: #FFC628;
+  color: #000;
+  box-shadow: 0 0 15px rgba(255, 198, 40, 0.6);
+}
+
+/* BADGE DI POJOK KIRI ATAS */
+.service-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #FFC628;
+  color: #000;
+  padding: 15px 40px 15px 20px;
+  font-weight: 800;
+  font-size: 14px;
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+  z-index: 10;
+}
+
+/* ================= RESPONSIVE (HP & TABLET) ================= */
+@media (max-width: 900px) {
+  .service {
+    padding: 80px 5%;
+    height: auto; /* Tinggi otomatis menyesuaikan konten */
   }
 
-  .service-center{
-    order:-1;
+  .service-container {
+    grid-template-columns: 1fr; /* Ubah jadi 1 kolom tumpuk ke bawah */
+    gap: 30px;
+    text-align: center; /* Semua rata tengah */
   }
 
-  .right{
-    text-align:left;
+  .service-center {
+    order: -1; /* Gambar pindah ke paling atas */
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .service-center img {
+    width: 160px;
   }
 
-  .right .line{
-    margin-left:0;
+  /* Reset Text Align di HP */
+  .left, .right {
+    text-align: center;
   }
 
-  .service-btn{
-    position:relative;
-    bottom:0;
-    margin-top:40px;
+  .left .service-item .line,
+  .right .service-item .line {
+    margin: 8px auto; /* Garis rata tengah */
+  }
+
+  .service-btn {
+    position: relative; /* Tombol tidak nempel bawah lagi */
+    bottom: auto;
+    left: auto;
+    transform: none;
+    display: inline-block;
+    margin-top: 30px;
   }
 }
 /* =================  CONTACT  ================= */
@@ -694,16 +797,25 @@ footer{
 
 <header>
   <div class="header-logo">
-    <img src="/logo2.png">
+    <img src="{{ asset('logo2.png') }}" alt="Logo">
+  </div>
+
+  <div class="hamburger">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
   </div>
 
   <nav class="nav-menu">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
+    <a href="{{ url('/home') }}">Home</a>
+    
+    <a href="{{ url('/about') }}">About</a> 
+    
     <a href="#service">Services</a>
     <a href="#contact">Contact</a>
-    <a href="#reservasi">Reservasi</a>
-  </nav>
+      
+    <a href="{{ url('/reservasi') }}">Reservasi</a>
+</nav>
 </header>
 
 <section id="home" class="hero">
@@ -764,7 +876,7 @@ footer{
   </div>
 
 </section>
-<section class="service">
+<section class="service" id="service">
 
   <div class="service-badge">
     Service & Price<br>All Store Wide
@@ -772,51 +884,54 @@ footer{
 
   <div class="service-container">
 
-    <!-- LEFT -->
+    {{-- LOGIKA PEMBAGI DATA: Membagi layanan menjadi 2 kolom (Kiri & Kanan) --}}
+    @php
+        // Hitung setengah dari total data untuk pembagian kolom
+        $half = ceil($layanan->count() / 2);
+        $chunks = $layanan->chunk($half);
+        
+        // Data untuk kolom Kiri (Chunk pertama)
+        $leftLayanan = $chunks->get(0);
+        
+        // Data untuk kolom Kanan (Chunk kedua - cek jika ada)
+        $rightLayanan = $chunks->get(1);
+    @endphp
+
     <div class="left">
-      <div class="service-item">
-        <h3>Styling</h3>
-        <div class="line"></div>
-        <p>Blow dry, wax, atau pomade untuk tampilan rapi.</p>
-      </div>
-
-      <div class="service-item">
-        <h3>Beard / Shave</h3>
-        <div class="line"></div>
-        <p>Cukur, rapikan jenggot dan kumis.</p>
-      </div>
-
-      <div class="service-item">
-        <h3>Hair Wash & Treatment</h3>
-        <div class="line"></div>
-        <p>Cuci rambut dan perawatan kulit kepala.</p>
-      </div>
+      @if($leftLayanan)
+        @foreach($leftLayanan as $item)
+          <div class="service-item">
+            <h3>{{ $item->nama }}</h3>
+            <div class="line"></div>
+            <p>{{ $item->deskripsi }}</p>
+            {{-- Menampilkan Harga Format Rupiah --}}
+            <small style="color: #FFC628; font-weight: bold; letter-spacing: 1px;">
+              Rp {{ number_format($item->harga, 0, ',', '.') }}
+            </small>
+          </div>
+        @endforeach
+      @endif
     </div>
 
-    <!-- CENTER -->
     <div class="service-center">
-      <img src="gunting.png" alt="Barber Tools">
+      {{-- Pastikan file gunting.png ada di folder public --}}
+      <img src="{{ asset('gunting.png') }}" alt="Barber Tools">
     </div>
 
-    <!-- RIGHT -->
     <div class="right">
-      <div class="service-item">
-        <h3>Haircut</h3>
-        <div class="line"></div>
-        <p>Potong rambut sesuai gaya dan tren.</p>
-      </div>
-
-      <div class="service-item">
-        <h3>Hot Towel / Relaxation</h3>
-        <div class="line"></div>
-        <p>Handuk hangat dan pijat ringan untuk pengalaman premium.</p>
-      </div>
-
-      <div class="service-item">
-        <h3>Haircut</h3>
-        <div class="line"></div>
-        <p>Potong rambut sesuai gaya dan tren.</p>
-      </div>
+      @if($rightLayanan)
+        @foreach($rightLayanan as $item)
+          <div class="service-item">
+            <h3>{{ $item->nama }}</h3>
+            <div class="line"></div>
+            <p>{{ $item->deskripsi }}</p>
+            {{-- Menampilkan Harga Format Rupiah --}}
+            <small style="color: #FFC628; font-weight: bold; letter-spacing: 1px;">
+              Rp {{ number_format($item->harga, 0, ',', '.') }}
+            </small>
+          </div>
+        @endforeach
+      @endif
     </div>
 
   </div>
@@ -924,16 +1039,34 @@ footer{
 </footer>
 
 <script>
-const reveals = document.querySelectorAll('.reveal');
+  // ================= 1. SCRIPT HAMBURGER MENU =================
+  const hamburger = document.querySelector(".hamburger");
+  const navMenu = document.querySelector(".nav-menu");
 
-window.addEventListener('scroll', () => {
-  reveals.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if(top < window.innerHeight - 120){
-      el.classList.add('active');
-    }
+  // Saat tombol burger diklik
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
   });
-});
+
+  // Saat salah satu link menu diklik (Menu nutup otomatis)
+  document.querySelectorAll(".nav-menu a").forEach(n => n.addEventListener("click", () => {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+  }));
+
+  // ================= 2. SCRIPT SCROLL ANIMATION =================
+  const reveals = document.querySelectorAll('.reveal');
+
+  window.addEventListener('scroll', () => {
+    reveals.forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      // Jika elemen sudah masuk viewport (layar), tambahkan class active
+      if(top < window.innerHeight - 120){
+        el.classList.add('active');
+      }
+    });
+  });
 </script>
 
 </body>

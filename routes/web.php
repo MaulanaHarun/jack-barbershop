@@ -3,17 +3,32 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontController;
-use App\Http\Controllers\Admin\LayananController;
-use App\Http\Controllers\Admin\JadwalController;
-use App\Http\Controllers\Admin\PemesananController;
+use App\Http\Controllers\AdminController; // Gunakan AdminController tunggal
 
+/*
+|--------------------------------------------------------------------------
+| REDIRECT ROOT
+|--------------------------------------------------------------------------
+*/
 Route::get('/', function () {
     return redirect('/home');
 });
 
 /*
 |--------------------------------------------------------------------------
-| LOGIN KHUSUS ADMIN
+| CUSTOMER AREA (FRONTEND)
+|--------------------------------------------------------------------------
+*/
+Route::get('/home', [FrontController::class, 'home']);
+Route::get('/reservasi', [FrontController::class, 'reservasi']);
+Route::post('/reservasi/proses', [FrontController::class, 'reservasiProses']);
+Route::get('/status/{id}', [FrontController::class, 'status']);
+Route::get('/about', [FrontController::class, 'about']);
+// Route::get('/profil', [FrontController::class, 'profil']); // Aktifkan jika method profil sudah ada
+
+/*
+|--------------------------------------------------------------------------
+| AUTHENTICATION (LOGIN ADMIN)
 |--------------------------------------------------------------------------
 */
 Route::get('/admin/login', [AuthController::class, 'loginForm'])->name('admin.login');
@@ -22,53 +37,38 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
 /*
 |--------------------------------------------------------------------------
-| CUSTOMER AREA (TIDAK PAKAI LOGIN)
+| ADMIN AREA (DASHBOARD)
 |--------------------------------------------------------------------------
 */
-Route::get('/home', [FrontController::class, 'home']);
-Route::get('/reservasi', [FrontController::class, 'reservasi']);
-Route::post('/reservasi/proses', [FrontController::class, 'reservasiProses']);
-Route::get('/status/{id}', [FrontController::class, 'status']);
-Route::get('/profil', [FrontController::class, 'profil']);
+// Kita gunakan prefix 'admin' saja. 
+// Keamanan sudah ditangani oleh fungsi 'cekLogin()' di dalam AdminController.
 
-/*
-|--------------------------------------------------------------------------
-| ADMIN AREA
-|--------------------------------------------------------------------------
-*/
-Route::middleware('admin')->prefix('admin')->group(function () {
+Route::prefix('admin')->group(function () {
 
-    Route::get('/dashboard', [AuthController::class, 'dashboard']);
+    // 1. Dashboard
+    Route::get('/dashboard', [AdminController::class, 'dashboard']);
 
+    // 2. Kelola Layanan
     Route::prefix('layanan')->group(function () {
-        Route::get('/', [LayananController::class, 'index']);
-        Route::get('/create', [LayananController::class, 'create']);
-        Route::post('/store', [LayananController::class, 'store']);
-        Route::get('/edit/{id}', [LayananController::class, 'edit']);
-        Route::post('/update/{id}', [LayananController::class, 'update']);
-        Route::get('/delete/{id}', [LayananController::class, 'destroy']);
+        // Menampilkan Tabel
+        Route::get('/', [AdminController::class, 'layananIndex']);
+        
+        // (Opsional) Jika nanti Anda membuat fitur Tambah/Edit
+        // Route::get('/create', [AdminController::class, 'layananCreate']);
+        // Route::post('/store', [AdminController::class, 'layananStore']);
+        // Route::get('/delete/{id}', [AdminController::class, 'layananDestroy']);
     });
 
+    // 3. Kelola Jadwal
     Route::prefix('jadwal')->group(function () {
-        Route::get('/', [JadwalController::class, 'index']);
-        Route::get('/create', [JadwalController::class, 'create']);
-        Route::post('/store', [JadwalController::class, 'store']);
-        Route::get('/edit/{id}', [JadwalController::class, 'edit']);
-        Route::post('/update/{id}', [JadwalController::class, 'update']);
-        Route::get('/delete/{id}', [JadwalController::class, 'destroy']);
+        Route::get('/', [AdminController::class, 'jadwalIndex']);
+        // Route::get('/create', [AdminController::class, 'jadwalCreate']);
+        // Route::post('/store', [AdminController::class, 'jadwalStore']);
     });
 
+    // 4. Kelola Pemesanan
     Route::prefix('pemesanan')->group(function () {
-        Route::get('/', [PemesananController::class, 'index']);
-        Route::get('/edit/{id}', [PemesananController::class, 'edit']);
-        Route::post('/update/{id}', [PemesananController::class, 'update']);
-        Route::get('/delete/{id}', [PemesananController::class, 'destroy']);
+        Route::get('/', [AdminController::class, 'pemesananIndex']);
     });
-    Route::get('/reservasi', function () {
-    return view('reservasi', [
-        'layanan' => App\Models\Layanan::all(),
-        'jadwal'  => App\Models\Jadwal::where('status','tersedia')->get()
-    ]);
-});
 
 });
